@@ -1,2 +1,2 @@
 # jsonparser
-pycparser is a parser for the json, written in pure Python.
+jsonparser is a parser for the json, written in pure Python.
