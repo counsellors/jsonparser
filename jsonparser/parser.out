@@ -1,0 +1,218 @@
+Created by PLY version 3.8 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    VARIABLE
+
+Grammar
+
+Rule 0     S' -> root_block
+Rule 1     root_block -> LSBRACKET block_item_list RSBRACKET
+Rule 2     root_block -> LBRACE block_item_list RBRACE
+Rule 3     root_block -> CONSTANT
+Rule 4     root_block -> NORMSTRING
+Rule 5     root_block -> NORMSTRING COLON root_block
+Rule 6     block_item_list -> root_block
+Rule 7     block_item_list -> block_item_list COMMA root_block
+Rule 8     empty -> <empty>
+
+Terminals, with rules where they appear
+
+COLON                : 5
+COMMA                : 7
+CONSTANT             : 3
+LBRACE               : 2
+LSBRACKET            : 1
+NORMSTRING           : 4 5
+RBRACE               : 2
+RSBRACKET            : 1
+VARIABLE             : 
+error                : 
+
+Nonterminals, with rules where they appear
+
+block_item_list      : 1 2 7
+empty                : 
+root_block           : 5 6 7 0
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . root_block
+    (1) root_block -> . LSBRACKET block_item_list RSBRACKET
+    (2) root_block -> . LBRACE block_item_list RBRACE
+    (3) root_block -> . CONSTANT
+    (4) root_block -> . NORMSTRING
+    (5) root_block -> . NORMSTRING COLON root_block
+
+    LSBRACKET       shift and go to state 3
+    LBRACE          shift and go to state 1
+    CONSTANT        shift and go to state 2
+    NORMSTRING      shift and go to state 5
+
+    root_block                     shift and go to state 4
+
+state 1
+
+    (2) root_block -> LBRACE . block_item_list RBRACE
+    (6) block_item_list -> . root_block
+    (7) block_item_list -> . block_item_list COMMA root_block
+    (1) root_block -> . LSBRACKET block_item_list RSBRACKET
+    (2) root_block -> . LBRACE block_item_list RBRACE
+    (3) root_block -> . CONSTANT
+    (4) root_block -> . NORMSTRING
+    (5) root_block -> . NORMSTRING COLON root_block
+
+    LSBRACKET       shift and go to state 3
+    LBRACE          shift and go to state 1
+    CONSTANT        shift and go to state 2
+    NORMSTRING      shift and go to state 5
+
+    root_block                     shift and go to state 6
+    block_item_list                shift and go to state 7
+
+state 2
+
+    (3) root_block -> CONSTANT .
+
+    RSBRACKET       reduce using rule 3 (root_block -> CONSTANT .)
+    COMMA           reduce using rule 3 (root_block -> CONSTANT .)
+    RBRACE          reduce using rule 3 (root_block -> CONSTANT .)
+    $end            reduce using rule 3 (root_block -> CONSTANT .)
+
+
+state 3
+
+    (1) root_block -> LSBRACKET . block_item_list RSBRACKET
+    (6) block_item_list -> . root_block
+    (7) block_item_list -> . block_item_list COMMA root_block
+    (1) root_block -> . LSBRACKET block_item_list RSBRACKET
+    (2) root_block -> . LBRACE block_item_list RBRACE
+    (3) root_block -> . CONSTANT
+    (4) root_block -> . NORMSTRING
+    (5) root_block -> . NORMSTRING COLON root_block
+
+    LSBRACKET       shift and go to state 3
+    LBRACE          shift and go to state 1
+    CONSTANT        shift and go to state 2
+    NORMSTRING      shift and go to state 5
+
+    root_block                     shift and go to state 6
+    block_item_list                shift and go to state 8
+
+state 4
+
+    (0) S' -> root_block .
+
+
+
+state 5
+
+    (4) root_block -> NORMSTRING .
+    (5) root_block -> NORMSTRING . COLON root_block
+
+    RSBRACKET       reduce using rule 4 (root_block -> NORMSTRING .)
+    COMMA           reduce using rule 4 (root_block -> NORMSTRING .)
+    RBRACE          reduce using rule 4 (root_block -> NORMSTRING .)
+    $end            reduce using rule 4 (root_block -> NORMSTRING .)
+    COLON           shift and go to state 9
+
+
+state 6
+
+    (6) block_item_list -> root_block .
+
+    RSBRACKET       reduce using rule 6 (block_item_list -> root_block .)
+    COMMA           reduce using rule 6 (block_item_list -> root_block .)
+    RBRACE          reduce using rule 6 (block_item_list -> root_block .)
+
+
+state 7
+
+    (2) root_block -> LBRACE block_item_list . RBRACE
+    (7) block_item_list -> block_item_list . COMMA root_block
+
+    RBRACE          shift and go to state 11
+    COMMA           shift and go to state 10
+
+
+state 8
+
+    (1) root_block -> LSBRACKET block_item_list . RSBRACKET
+    (7) block_item_list -> block_item_list . COMMA root_block
+
+    RSBRACKET       shift and go to state 12
+    COMMA           shift and go to state 10
+
+
+state 9
+
+    (5) root_block -> NORMSTRING COLON . root_block
+    (1) root_block -> . LSBRACKET block_item_list RSBRACKET
+    (2) root_block -> . LBRACE block_item_list RBRACE
+    (3) root_block -> . CONSTANT
+    (4) root_block -> . NORMSTRING
+    (5) root_block -> . NORMSTRING COLON root_block
+
+    LSBRACKET       shift and go to state 3
+    LBRACE          shift and go to state 1
+    CONSTANT        shift and go to state 2
+    NORMSTRING      shift and go to state 5
+
+    root_block                     shift and go to state 13
+
+state 10
+
+    (7) block_item_list -> block_item_list COMMA . root_block
+    (1) root_block -> . LSBRACKET block_item_list RSBRACKET
+    (2) root_block -> . LBRACE block_item_list RBRACE
+    (3) root_block -> . CONSTANT
+    (4) root_block -> . NORMSTRING
+    (5) root_block -> . NORMSTRING COLON root_block
+
+    LSBRACKET       shift and go to state 3
+    LBRACE          shift and go to state 1
+    CONSTANT        shift and go to state 2
+    NORMSTRING      shift and go to state 5
+
+    root_block                     shift and go to state 14
+
+state 11
+
+    (2) root_block -> LBRACE block_item_list RBRACE .
+
+    RSBRACKET       reduce using rule 2 (root_block -> LBRACE block_item_list RBRACE .)
+    COMMA           reduce using rule 2 (root_block -> LBRACE block_item_list RBRACE .)
+    RBRACE          reduce using rule 2 (root_block -> LBRACE block_item_list RBRACE .)
+    $end            reduce using rule 2 (root_block -> LBRACE block_item_list RBRACE .)
+
+
+state 12
+
+    (1) root_block -> LSBRACKET block_item_list RSBRACKET .
+
+    RSBRACKET       reduce using rule 1 (root_block -> LSBRACKET block_item_list RSBRACKET .)
+    COMMA           reduce using rule 1 (root_block -> LSBRACKET block_item_list RSBRACKET .)
+    RBRACE          reduce using rule 1 (root_block -> LSBRACKET block_item_list RSBRACKET .)
+    $end            reduce using rule 1 (root_block -> LSBRACKET block_item_list RSBRACKET .)
+
+
+state 13
+
+    (5) root_block -> NORMSTRING COLON root_block .
+
+    RSBRACKET       reduce using rule 5 (root_block -> NORMSTRING COLON root_block .)
+    COMMA           reduce using rule 5 (root_block -> NORMSTRING COLON root_block .)
+    RBRACE          reduce using rule 5 (root_block -> NORMSTRING COLON root_block .)
+    $end            reduce using rule 5 (root_block -> NORMSTRING COLON root_block .)
+
+
+state 14
+
+    (7) block_item_list -> block_item_list COMMA root_block .
+
+    RSBRACKET       reduce using rule 7 (block_item_list -> block_item_list COMMA root_block .)
+    COMMA           reduce using rule 7 (block_item_list -> block_item_list COMMA root_block .)
+    RBRACE          reduce using rule 7 (block_item_list -> block_item_list COMMA root_block .)
+
