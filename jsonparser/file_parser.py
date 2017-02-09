@@ -47,8 +47,7 @@ def t_error(t):
 
 @lex.TOKEN(keyword)
 def t_KEYWORDS(t):
-    # remove spaces
-    # t.value = ''.join(x for x in t.value if not x.isspace())
+    # todo: to support false,true
     t.value = None
     return t
 
@@ -110,7 +109,6 @@ def p_block_item_list(p):
     """ block_item_list : block_item_list COMMA root_block
                         | root_block
     """
-    # Empty block items (plain ';') produce [None], so ignore them
     if len(p) == 2:
         p[0] = [p[1]]
     else:
@@ -146,7 +144,6 @@ def p_error(p):
 if __name__ == '__main__':
     global lexer,parser
     filename = 'test/exp2.json'
-    # filename = "rules/sd_topics.C"
     lexer = lex.lex(debug=1)
     with open(filename, 'r') as inputfile:
         contents = inputfile.read()
@@ -155,11 +152,5 @@ if __name__ == '__main__':
         #     logging.debug("line %d : %s (%s) " % (token.lineno, token.type, token.value))
         parser = yacc.yacc(debug=1)
         s = parser.parse(contents)
-
         print s
         print json.dumps(s)
-        # result = yacc.parse(contents, debug=True)
-        # print(result) #Stack immediatly contains . $end and the p_error(p) I've defined confirms EOF was reached
-        # tmp = "{{var1 := 'some text' ; var2 := 'some other text' ; var3 := ( 'text', 'text2') ; }}" #Same contents as the input file
-        # result = yacc.parse(tmp, debug=True)
-        # print(result) #correct results
